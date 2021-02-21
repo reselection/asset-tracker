@@ -1,9 +1,9 @@
 #!/bin/python3
 
 import json
-from urllib.request import urlopen
 import requests
 import time
+from urllib.request import urlopen
 
 def get_data():
     """
@@ -21,6 +21,7 @@ def get_data():
          asset_request(url)
     elif reqdata == 'quote':
         url = f"https://financialmodelingprep.com/api/v3/quote/{ticker.upper()}?apikey=2bdce558ad8fcab19ca4cbd5abf8a21b"
+        asset_request(url)
     else:
         print("Enter 'quote' or 'profile'\nReturning...")
         time.sleep(3)
@@ -28,15 +29,18 @@ def get_data():
 
 def asset_request(url):
     print("requesting data...")
-    """requests json data and returns the price"""
+    """
+    requests json data and returns all data.
+    """
     company_data  = requests.get(url)
     company_data = company_data.json()
     #price = f"{company_data[0]['price']}"
-    price = f"{company_data}"
-    print(float(price))
+    data = f"{company_data}"
+    sort_data(data)
+    print(data)
 
 def sort_data(input_request):
-    pass
+    pass    
 
 
 get_data()
