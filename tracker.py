@@ -41,6 +41,8 @@ def sort_data(input_request):
     User can request specific parts of the json data like price, or all here.
     Uses a while loop so data reloading wont be needed.
     """
+    profile_json = ['all','price','volAvg','mktCap','website','description','industry','ceo','sector','fullTimeEmployees']
+
     while True:
         print("Type 'help' for more info")
         sort = input(": ")
@@ -48,11 +50,17 @@ def sort_data(input_request):
             print(input_request)
         elif sort == 'help':
             print("Enter 'quit' to exit\n'restart' to restart")
-            print("'all' : dumps all info.\n'price' : shows current share price")
-        elif sort == 'price':
-            print(input_request[0]['price'])
+            print("Options:")
+            for x in profile_json:
+                print(f"\t- {x}")
+        elif sort:
+            for x in profile_json:
+                if sort.lower() == x.lower():
+                    print(input_request[0][x])
         elif sort == 'quit':
-            quit()
+            break
+        elif sort == 'return':
+            sort_data()
         elif sort == 'restart':
             get_data()
         else:
