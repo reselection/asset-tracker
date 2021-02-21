@@ -44,25 +44,23 @@ def sort_data(input_request):
     profile_json = ['all','price','volAvg','mktCap','website','description','industry','ceo','sector','fullTimeEmployees']
 
     while True:
-        print("Type 'help' for more info")
+        print("Type 'help profile' for more info")
         sort = input(": ")
         if sort == 'all':
             print(input_request)
-        elif sort == 'help':
+        elif sort == 'help profile':
             print("Enter 'quit' to exit\n'restart' to restart")
             print("Options:")
             for x in profile_json:
                 print(f"\t- {x}")
+        elif sort == 'restart':
+            get_data()
+        elif sort == 'quit':
+            break
         elif sort:
             for x in profile_json:
                 if sort.lower() == x.lower():
                     print(input_request[0][x])
-        elif sort == 'quit':
-            break
-        elif sort == 'return':
-            sort_data()
-        elif sort == 'restart':
-            get_data()
         else:
             print("Data not found, try again")
             continue
