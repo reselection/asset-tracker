@@ -3,7 +3,7 @@
 import json
 from urllib.request import urlopen
 import requests
-
+import time
 
 def get_data():
     """
@@ -19,6 +19,12 @@ def get_data():
     elif reqdata == 'profile':
          url = f"https://financialmodelingprep.com/api/v3/profile/{ticker.upper()}?apikey=2bdce558ad8fcab19ca4cbd5abf8a21b"
          asset_request(url)
+    elif reqdata == 'quote':
+        url = f"https://financialmodelingprep.com/api/v3/quote/{ticker.upper()}?apikey=2bdce558ad8fcab19ca4cbd5abf8a21b"
+    else:
+        print("Enter 'quote' or 'profile'\nReturning...")
+        time.sleep(3)
+        get_data()
 
 def asset_request(url):
     print("requesting data...")
