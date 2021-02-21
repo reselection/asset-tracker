@@ -57,6 +57,7 @@ def sort_data_quote(input_request):
             for x in quote_json:
                 if sort.lower() == x.lower():
                     print(input_request[0][x])
+                    continue
         else:
             print("Data not found, try again")
             continue
@@ -96,6 +97,7 @@ def sort_data_profile(input_request):
             for x in profile_json:
                 if sort.lower() == x.lower():
                     print(input_request[0][x])
+                    continue
         else:
             print("Data not found, try again")
             continue
