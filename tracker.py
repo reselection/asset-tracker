@@ -30,17 +30,35 @@ def get_data():
 def asset_request(url):
     print("requesting data...")
     """
-    requests json data and returns all data.
+    requests json data and returns all data to sort_data().
     """
-    company_data  = requests.get(url)
-    company_data = company_data.json()
-    #price = f"{company_data[0]['price']}"
-    data = f"{company_data}"
+    data  = requests.get(url)
+    data = data.json()
     sort_data(data)
-    print(data)
 
 def sort_data(input_request):
-    pass    
+    """
+    User can request specific parts of the json data like price, or all here.
+    Uses a while loop so data reloading wont be needed.
+    """
+    while True:
+        print("Type 'help' for more info")
+        sort = input(": ")
+        if sort == 'all':
+            print(input_request)
+        elif sort == 'help':
+            print("Enter 'quit' to exit\n'restart' to restart")
+            print("'all' : dumps all info.\n'price' : shows current share price")
+        elif sort == 'price':
+            print(input_request[0]['price'])
+        elif sort == 'quit':
+            quit()
+        elif sort == 'restart':
+            get_data()
+        else:
+            print("Data not found, try again")
+            continue
+        
 
 
 get_data()
