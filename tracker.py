@@ -1,23 +1,36 @@
 #!/bin/python3
 
-import pandas as pd
 import json
 from urllib.request import urlopen
 import requests
 
-asset = input("Enter asset ticker: ")
+
+def get_data():
+    """
+    Asks user for all the data it requires, then sends it to asset_request.
+    """
+    print("Press 'quit' to exit")
+    ticker = input("Enter asset ticker: ")
+    if ticker == 'quit':
+        quit()
+    reqdata = input("Recieve quote or profile?: ")
+    if reqdata == 'quit':
+        quit()
+    elif reqdata == 'profile':
+         url = f"https://financialmodelingprep.com/api/v3/profile/{ticker.upper()}?apikey=2bdce558ad8fcab19ca4cbd5abf8a21b"
+         asset_request(url)
 
 def asset_request(url):
+    print("requesting data...")
     """requests json data and returns the price"""
     company_data  = requests.get(url)
     company_data = company_data.json()
-    print("What data would you like to recieve back?i\nEnter 'help' for more info.")
-    reqdata = input(": ")
-    price = f"{company_data[0]['price']}"
-    return float(price)
+    #price = f"{company_data[0]['price']}"
+    price = f"{company_data}"
+    print(float(price))
 
-url = (f"https://financialmodelingprep.com/api/v3/quote/{asset.upper()}?apikey=2bdce558ad8fcab19ca4cbd5abf8a21b")
-
-print(asset_request(url))
+def sort_data(input_request):
+    pass
 
 
+get_data()
