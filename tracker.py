@@ -18,25 +18,60 @@ def get_data():
         quit()
     elif reqdata == 'profile':
          url = f"https://financialmodelingprep.com/api/v3/profile/{ticker.upper()}?apikey=2bdce558ad8fcab19ca4cbd5abf8a21b"
-         asset_request(url)
+         asset_request_profile(url)
     elif reqdata == 'quote':
         url = f"https://financialmodelingprep.com/api/v3/quote/{ticker.upper()}?apikey=2bdce558ad8fcab19ca4cbd5abf8a21b"
-        asset_request(url)
+        asset_request_quote(url)
     else:
         print("Enter 'quote' or 'profile'\nReturning...")
         time.sleep(3)
         get_data()
 
-def asset_request(url):
+def asset_request_quote(url):
+    """
+    requests quote data in json format and returns it to sort_data_quote
+    """
+    data = requests.get(url)
+    data = data.json()
+    sort_data_quote(data)
+
+def sort_data_quote(input_request):
+    """ADD"""
+    quote_json = ['all','price','changePercentage','change','dayHigh','dayLow','yearHigh','yearLow','marketCap','priceAvg50',
+    'priceAvg200', 'volume','open','previousClose','earningsAnnouncement','sharesOutstanding']
+    while True:
+        print("Type 'help' for more info")
+        sort = input(": ")
+        if sort == "all":
+            print(input_request)
+        elif sort == 'help':
+            print("Type 'quit to exit\n'restart' to restart")
+            print("Options:")
+            for x in quote_json:
+                print(f"\t- {x}")
+        elif sort == 'restart':
+            get_data()
+        elif sort == 'quit':
+            break
+        elif sort:
+            for x in quote_json:
+                if sort.lower() == x.lower():
+                    print(input_request[0][x])
+        else:
+            print("Data not found, try again")
+            continue
+ 
+
+def asset_request_profile(url):
     print("requesting data...")
     """
-    requests json data and returns all data to sort_data().
+    requests json data and returns all data to sort_data_profile().
     """
     data  = requests.get(url)
     data = data.json()
-    sort_data(data)
+    sort_data_profile(data)
 
-def sort_data(input_request):
+def sort_data_profile(input_request):
     """
     User can request specific parts of the json data like price, or all here.
     Uses a while loop so data reloading wont be needed.
@@ -44,11 +79,11 @@ def sort_data(input_request):
     profile_json = ['all','price','volAvg','mktCap','website','description','industry','ceo','sector','fullTimeEmployees']
 
     while True:
-        print("Type 'help profile' for more info")
+        print("Type 'help' for more info")
         sort = input(": ")
         if sort == 'all':
             print(input_request)
-        elif sort == 'help profile':
+        elif sort == 'help':
             print("Enter 'quit' to exit\n'restart' to restart")
             print("Options:")
             for x in profile_json:
