@@ -32,11 +32,14 @@ def asset_request_quote(url):
     requests quote data in json format and returns it to sort_data_quote
     """
     data = requests.get(url)
+    if not data.json():
+        print("Could't reach URL, check spelling and try again")
+        get_data()
     data = data.json()
     sort_data_quote(data)
 
 def sort_data_quote(input_request):
-    """ADD"""
+    """User can filter quote data here and view options"""
     quote_json = ['all','price','changePercentage','change','dayHigh','dayLow','yearHigh','yearLow','marketCap','priceAvg50',
     'priceAvg200', 'volume','open','previousClose','earningsAnnouncement','sharesOutstanding']
     while True:
