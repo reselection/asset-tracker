@@ -59,8 +59,10 @@ def sort_data_quote(input_request):
         elif sort:
             for x in quote_json:
                 if sort.lower() == x.lower():
-                    print(input_request[0][x])
-                continue
+                    try:
+                        print(input_request[0][x])
+                    except:
+                        print("Data not found.")
         else:
             print("Data not found, try again")
             continue
