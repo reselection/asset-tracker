@@ -17,10 +17,10 @@ def get_data():
     if reqdata == 'quit':
         quit()
     elif reqdata == 'profile':
-         url = f"https://financialmodelingprep.com/api/v3/profile/{ticker.upper()}?apikey=2bdce558ad8fcab19ca4cbd5abf8a21b"
+         url = f"https://financialmodelingprep.com/api/v3/profile/{ticker.upper()}?apikey="
          asset_request_profile(url)
     elif reqdata == 'quote':
-        url = f"https://financialmodelingprep.com/api/v3/quote/{ticker.upper()}?apikey=2bdce558ad8fcab19ca4cbd5abf8a21b"
+        url = f"https://financialmodelingprep.com/api/v3/quote/{ticker.upper()}?apikey="
         asset_request_quote(url)
     else:
         print("Enter 'quote' or 'profile'\nReturning...")
